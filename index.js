@@ -1,9 +1,4 @@
-/**
- * @format
- */
+import { AppRegistry } from "react-native";
+import appComponent from "./src/index";
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
-
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent("rn_movies_app", () => appComponent);
