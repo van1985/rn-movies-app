@@ -7,6 +7,12 @@
   },
   "dependencies": {
     "react-native": "0.59.4",
-    "react": "16.8.6"
+    "react-navigation": "^1.5.11",
+    "react": "16.8.6",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.4.0",
+    "redux-thunk": "^2.2.0"
   }
 }
