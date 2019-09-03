@@ -34,6 +34,7 @@
   },
   "lint-staged": {
     "*.js": [
+        "npm run lint",
         "npm run pretty",
         "git add"
     ]
