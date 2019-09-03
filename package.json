@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "eslint *.js **/*.js",
-    "precommit": "lint-staged",
-    "prettier": "prettier --write"
+    "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
+    "precommit": "lint-staged && npm test"
   },
   "dependencies": {
     "react-native": "0.59.4",
@@ -27,17 +27,16 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
-    "prettier": "^1.11.1",
-    "lint-staged": "^7.0.4"
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.11.1"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{json,md}": [
-      "prettier --write",
-      "git add"
+    "*.js": [
+        "npm run lint",
+        "npm run pretty",
+        "git add"
     ]
   }
 }
