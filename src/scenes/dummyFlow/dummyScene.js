@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import DummyComponent from '../../components/dummyComponent';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { View, StyleSheet, Text } from "react-native";
+import DummyComponent from "../../components/dummyComponent";
+import { search } from "../../reducers/dummy/dummyActions";
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  }
+    wrapper: {
+        flex: 1
+    }
 });
 
 class dummyScene extends Component {
-  static navigationOptions = {
-    title: 'DummyScene',
-  }
+    static navigationOptions = {
+        title: "DummyScene"
+    };
 
-  render() {
-    return (
-      <View style={styles.wrapper}>
-        <DummyComponent />
-      </View>
-    );
-  }
+    componentDidMount() {
+        this.props.onSearch("avenger");
+    }
+
+    render() {
+        const { searchResult } = this.props;
+        return (
+            <View style={styles.wrapper}>
+                <DummyComponent />
+                <Text>${JSON.stringify(searchResult)}`)</Text>
+            </View>
+        );
+    }
 }
 
-export default dummyScene;
+export default connect(
+    state => ({ searchResult: state.search }),
+    {
+        onSearch: search
+    }
+)(dummyScene);

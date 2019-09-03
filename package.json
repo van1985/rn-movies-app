@@ -9,10 +9,12 @@
     "precommit": "lint-staged && npm test"
   },
   "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "16.8.6",
     "react-native": "0.59.4",
     "react-navigation": "^1.5.11",
-    "react": "16.8.6",
     "react-redux": "^5.0.6",
+    "react-router-dom": "^5.0.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.4.0",
@@ -34,9 +36,9 @@
   },
   "lint-staged": {
     "*.js": [
-        "npm run lint",
-        "npm run pretty",
-        "git add"
+      "npm run lint",
+      "npm run pretty",
+      "git add"
     ]
   }
 }
