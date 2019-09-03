@@ -8,20 +8,20 @@ export default TabNavigator(
       screen: dummyScene,
       navigationOptions: {
         swipeEnabled: true,
-        title: 'Dummy Scene',
-      },
-    },
+        title: 'Dummy Scene'
+      }
+    }
   },
   {
     tabBarOptions: {
       activeTintColor: 'white',
       labelStyle: {
-        fontSize: 14,
+        fontSize: 14
       },
       style: {
         backgroundColor: '#B2CE38',
-        paddingBottom: Platform.OS === 'ios' ? 15 : 0,
-      },
-    },
-  },
+        paddingBottom: Platform.OS === 'ios' ? 15 : 0
+      }
+    }
+  }
 );

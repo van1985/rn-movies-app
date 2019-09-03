@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "eslint *.js **/*.js",
-    "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
+    "pretty": "prettier --write \"src/**/*.js\"",
     "precommit": "lint-staged && npm test"
   },
   "dependencies": {
