@@ -4,11 +4,14 @@ import dummyFlow from '../scenes/dummyFlow/navigator';
 /**
  * Main Stack Navigation. Used to display the app header
  */
-export default SwitchNavigator({
-  dummy: {
-    screen: dummyFlow
+export default SwitchNavigator(
+  {
+    dummy: {
+      screen: dummyFlow
+    }
   },
-}, {
-  initialRouteName: 'dummy',
-  headerMode: 'none'
-});
+  {
+    initialRouteName: 'dummy',
+    headerMode: 'none'
+  }
+);

@@ -4,10 +4,8 @@ import styles from './styles';
 
 const dummyComponent = () => (
   <View style={styles.wrapper}>
-    <Text>
-                        Test
-    </Text>
-  </View>);
+    <Text>Test</Text>
+  </View>
+);
 
 export default dummyComponent;
-

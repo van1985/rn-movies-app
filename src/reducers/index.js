@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import dummyReducer from './dummyReducer';
+import dummyReducer from './dummy/dummyReducer';
 
 export default combineReducers({
-  dummyReducer
+  search: dummyReducer
 });
