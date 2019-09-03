@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import DummyComponent from '../../components/dummyComponent';
 import {
   View,
-  Text,
   StyleSheet,
 } from 'react-native';
+import DummyComponent from '../../components/dummyComponent';
 
-
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   }
@@ -19,12 +17,12 @@ class dummyScene extends Component {
   }
 
   render() {
-      return (
-        <View style={styles.wrapper}>
-            <DummyComponent />
-        </View>
+    return (
+      <View style={styles.wrapper}>
+        <DummyComponent />
+      </View>
     );
-};
+  }
 }
 
 export default dummyScene;
