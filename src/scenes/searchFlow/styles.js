@@ -7,6 +7,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: 30
   },
+  innerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   text: {
     color: 'black',
     fontSize: 14

@@ -9,6 +9,7 @@
     "precommit": "lint-staged && npm test"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.8.6",
     "react-native": "0.59.4",
@@ -26,8 +27,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.4.0",
-    "redux-thunk": "^2.2.0",
-    "lodash": "^4.17.11"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
