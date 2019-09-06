@@ -38,7 +38,8 @@ const movieCard = props => (
         <Button
           icon={<Icon name="star" color="white" />}
           buttonStyle={styles.button}
-          title="Add to Favourites"
+          title="Add to Favorites"
+          onPress={props.addMovie}
         />
         <Button
           icon={<Icon name="movie" color="white" />}

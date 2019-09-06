@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import searchScene from '../scenes/searchFlow/searchScene';
-import favouritesScene from '../scenes/favoritesFlow/favoritesScene';
+import favoritesScene from '../scenes/favoritesFlow/favoritesScene';
 
 const AppNavigator = createBottomTabNavigator(
   {
@@ -13,8 +13,8 @@ const AppNavigator = createBottomTabNavigator(
         tabBarIcon: () => <Icon name="ios-search" size={24} />
       }
     },
-    favourites: {
-      screen: favouritesScene,
+    favorites: {
+      screen: favoritesScene,
       navigationOptions: {
         tabBarLabel: 'Favorites',
         tabBarIcon: () => <Icon name="ios-star" size={24} />
@@ -23,7 +23,7 @@ const AppNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: 'search',
-    order: ['search', 'favourites'],
+    order: ['search', 'favorites'],
     navigationOptions: {
       tabBarVisible: true,
       tabBarIcon: null

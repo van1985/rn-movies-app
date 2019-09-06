@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import MovieCard from '../../components/movieCard/movieCard';
-import { search } from '../../reducers/movies/moviesActions';
+import { search, addMovieToFavorite } from '../../reducers/movies/moviesActions';
 
 import styles from './styles';
 
@@ -11,10 +11,6 @@ class searchScene extends Component {
   state = {
     term: '',
     typingTimeout: 0
-  };
-
-  componentDidMount = () => {
-    this.props.onSearch('The ');
   };
 
   searchTerm = term => {
@@ -33,10 +29,23 @@ class searchScene extends Component {
     });
   };
 
-  renderItem = ({ item }) => <MovieCard {...item} />;
+  addToFavorite = movie => {
+    this.props.onAddMovieToFavorite(movie);
+  };
+
+  buildFlatList = movies => (
+    <FlatList
+      keyExtractor={item => item.id}
+      data={movies.searchResult.results}
+      renderItem={this.renderItem}
+      style={styles.flatList}
+    />
+  );
+
+  renderItem = ({ item }) => <MovieCard {...item} addMovie={() => this.addToFavorite(item)} />;
 
   render() {
-    const { searchResult } = this.props;
+    const { movies } = this.props;
     const { term } = this.state;
     return (
       <View style={styles.container}>
@@ -46,20 +55,16 @@ class searchScene extends Component {
           value={term}
           containerStyle={styles.searchbar}
         />
-        <FlatList
-          keyExtractor={item => item.id}
-          data={searchResult.searchResult.results}
-          renderItem={this.renderItem}
-          style={styles.flatList}
-        />
+        {this.buildFlatList(movies)}
       </View>
     );
   }
 }
 
 export default connect(
-  state => ({ searchResult: state.search }),
+  state => ({ movies: state.movies }),
   {
-    onSearch: search
+    onSearch: search,
+    onAddMovieToFavorite: addMovieToFavorite
   }
 )(searchScene);
