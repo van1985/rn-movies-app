@@ -5,15 +5,26 @@ import {
   FETCHING_DATA_SUCCESS,
   FETCHING_DATA,
   ADD_FAVORITE,
-  REMOVE_FAVORITE
+  REMOVE_FAVORITE,
+  SELECT_MOVIE,
+  TRAILER_FETCH_KEY_PERFORMED,
+  TRAILER_FETCH_KEY_SUCCESS,
+  TRAILER_FETCH_KEY_FAILURE
 } from './moviesActionTypes';
 
-const initialState = {
+const initialState = () => ({
   isFetching: false,
   searchResult: {},
   errors: '',
-  favorites: []
-};
+  favorites: [],
+  currentSelectedId: null,
+  trailersData: {
+    isFetching: false,
+    errors: '',
+    success: false,
+    trailersKeys: {}
+  }
+});
 
 const filter = (state, data) => {
   const newState = cloneDeep(data);
@@ -42,7 +53,7 @@ const removeFavorite = (state, idMovie) => {
   return favoritesUpdate;
 };
 
-const moviesReducer = (state = initialState, { type, payload }) => {
+const moviesReducer = (state = initialState(), { type, payload }) => {
   switch (type) {
     case FETCHING_DATA:
       return {
@@ -71,6 +82,40 @@ const moviesReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         favorites: removeFavorite(state, payload.movieId)
+      };
+    case SELECT_MOVIE:
+      return {
+        ...state,
+        currentSelectedId: payload.movieId
+      };
+    case TRAILER_FETCH_KEY_PERFORMED:
+      return {
+        ...state,
+        trailersData: {
+          isFetching: true,
+          success: false,
+          errors: '',
+          trailersKeys: {}
+        }
+      };
+    case TRAILER_FETCH_KEY_FAILURE:
+      return {
+        ...state,
+        trailersData: {
+          ...state.trailersData,
+          isFetching: false,
+          errors: payload.errors
+        }
+      };
+    case TRAILER_FETCH_KEY_SUCCESS:
+      return {
+        ...state,
+        trailersData: {
+          ...state.trailersData,
+          isFetching: false,
+          success: true,
+          trailersKeys: payload.response.results
+        }
       };
     default:
       return state;
