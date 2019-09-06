@@ -8,6 +8,6 @@ const logger = createLogger({
   duration: true
 });
 
-const tilteStore = createStore(rootReducer, compose(applyMiddleware(thunk, logger)));
+const myStore = createStore(rootReducer, compose(applyMiddleware(thunk, logger)));
 
-export default tilteStore;
+export default myStore;
