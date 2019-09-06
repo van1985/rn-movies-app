@@ -55,3 +55,14 @@ Mobile App for search movies that connect with TMDb Api.
 |redux-logger|^3.0.6|
 |redux-persist|^5.4.0|
 |redux-thunk|^2.2.0|
+
+
+### Some Screenshots from the App ###
+
+![Screenshots-1](/screenshots/img1.png)
+
+![Screenshots-2](/screenshots/img2.png)
+
+![Screenshots-3](/screenshots/img3.png)
+
+![Screenshots-4](/screenshots/img4.png)
