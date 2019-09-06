@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "npx jetify",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "eslint *.js **/*.js",
     "pretty": "prettier --write \"src/**/*.js\"",
-    "precommit": "lint-staged && npm test"
+    "precommit": "lint-staged && npm test",
+    "test": "jest --updateSnapshot",
+    "coverage": "jest --verbose --coverage && open ./coverage/lcov-report/index.html"
   },
   "dependencies": {
     "lodash": "^4.17.15",
@@ -31,6 +34,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
+    "babel-jest": "24.9.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.14.0",
     "eslint": "^6.3.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -40,14 +46,41 @@
     "eslint-plugin-react": "^7.7.0",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
+    "jest-react-native": "^18.0.0",
+    "jetifier": "^1.6.4",
     "lint-staged": "^7.3.0",
-    "prettier": "^1.11.1"
+    "prettier": "^1.11.1",
+    "react-dom": "16.8.6",
+    "redux-mock-store": "^1.5.3"
   },
   "lint-staged": {
     "*.js": [
       "npm run lint",
       "npm run pretty",
       "git add"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "preset": "react-native",
+    "moduleNameMapper": {},
+    "transform": {
+      "^.+\\.test.js$": "babel-jest"
+    },
+    "modulePathIgnorePatterns": [],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-navigation)"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 80
+      }
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.js"
     ]
   }
 }

@@ -16,9 +16,7 @@ export const fetchFailure = (error, type) => ({
   payload: { error }
 });
 
-export const fetchRequest = type => ({
-  type
-});
+export const fetchRequest = type => ({ type });
 
 export const fetchSuccess = (data, type) => ({
   type,
@@ -37,7 +35,6 @@ export const search = q => (dispatch, getState) => {
     .then(data => dispatch(fetchSuccess({ response: data, lastSearch: q }, FETCHING_DATA_SUCCESS)))
     .catch(error => {
       dispatch(fetchFailure(error, FETCHING_DATA_FAILURE));
-      return Promise.reject(error);
     });
 };
 
@@ -65,6 +62,5 @@ export const getTrailerKey = () => (dispatch, getState) => {
     .then(data => dispatch(fetchSuccess({ response: data }, TRAILER_FETCH_KEY_SUCCESS)))
     .catch(error => {
       dispatch(fetchFailure(error, TRAILER_FETCH_KEY_FAILURE));
-      return Promise.reject(error);
     });
 };

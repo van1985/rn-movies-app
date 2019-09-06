@@ -28,7 +28,7 @@ class favoritesScene extends Component {
           backgroundColor="#313337"
         />
         <FlatList
-          keyExtractor={item => item.id}
+          keyExtractor={item => `${item.id}`}
           data={movies.favorites}
           renderItem={this.renderItem}
           style={styles.flatList}
