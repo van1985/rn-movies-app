@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { cloneDeep, reject, map, get, find } from 'lodash';
+import { cloneDeep, reject } from 'lodash';
 import {
   FETCHING_DATA_FAILURE,
   FETCHING_DATA_SUCCESS,
@@ -29,17 +29,8 @@ const initialState = () => ({
   }
 });
 
-const filter = (state, data) => {
+const filter = data => {
   const newState = cloneDeep(data);
-
-  newState.results = map(newState.results, result => {
-    const movieId = get(result, 'id');
-    if (find(state.favorites, ['id', movieId])) {
-      return Object.assign(result, { favorite: true });
-    }
-    return Object.assign(result, { favorite: false });
-  });
-
   newState.results = newState.results.slice(0, Config.RESULTS_COUNT);
   return newState;
 };
@@ -65,7 +56,7 @@ const moviesReducer = (state = initialState(), { type, payload }) => {
         isFetching: true,
         errors: '',
         success: false,
-        searchResult: []
+        searchResult: {}
       };
     case FETCHING_DATA_FAILURE:
       return {
@@ -79,7 +70,7 @@ const moviesReducer = (state = initialState(), { type, payload }) => {
         isFetching: false,
         success: true,
         lastSearch: payload.lastSearch,
-        searchResult: filter(state, payload.response)
+        searchResult: filter(payload.response)
       };
     }
     case ADD_FAVORITE:
