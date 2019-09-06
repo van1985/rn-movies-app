@@ -43,6 +43,7 @@ const movieCard = props => (
           disabled={props.favorite}
         />
         <Button
+          onPress={props.onWatchTrailer}
           icon={<Icon name="movie" color="white" />}
           buttonStyle={[styles.button, styles.marginLeft]}
           title="Watch Trailer"

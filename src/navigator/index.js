@@ -1,10 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import searchScene from '../scenes/searchFlow/searchScene';
-import favoritesScene from '../scenes/favoritesFlow/favoritesScene';
+import favouritesScene from '../scenes/favoritesFlow/favoritesScene';
+import trailersScene from '../scenes/trailersFlow/trailersScene';
 
-const AppNavigator = createBottomTabNavigator(
+const tabNavigator = createBottomTabNavigator(
   {
     search: {
       screen: searchScene,
@@ -13,8 +15,8 @@ const AppNavigator = createBottomTabNavigator(
         tabBarIcon: () => <Icon name="ios-search" size={24} />
       }
     },
-    favorites: {
-      screen: favoritesScene,
+    favourites: {
+      screen: favouritesScene,
       navigationOptions: {
         tabBarLabel: 'Favorites',
         tabBarIcon: () => <Icon name="ios-star" size={24} />
@@ -23,12 +25,23 @@ const AppNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: 'search',
-    order: ['search', 'favorites'],
+    order: ['search', 'favourites'],
     navigationOptions: {
+      header: null,
       tabBarVisible: true,
       tabBarIcon: null
     }
   }
 );
 
-export default AppNavigator;
+const mainNavigator = createStackNavigator({
+  tabNavigator,
+  trailers: {
+    screen: trailersScene,
+    navigationOptions: {
+      title: 'Trailer'
+    }
+  }
+});
+
+export default mainNavigator;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import MovieCard from '../../components/movieCard/movieCard';
-import { search, addMovieToFavorite } from '../../reducers/movies/moviesActions';
+import { search, addMovieToFavorite, selectMovie } from '../../reducers/movies/moviesActions';
 
 import styles from './styles';
 
@@ -11,6 +11,12 @@ class searchScene extends Component {
   state = {
     term: '',
     typingTimeout: 0
+  };
+
+  handleWatchTrailer = id => {
+    const { navigation, onSelectMovie } = this.props;
+    onSelectMovie(id);
+    navigation.navigate('trailers');
   };
 
   searchTerm = term => {
@@ -42,7 +48,13 @@ class searchScene extends Component {
     />
   );
 
-  renderItem = ({ item }) => <MovieCard {...item} addMovie={() => this.addToFavorite(item)} />;
+  renderItem = ({ item }) => (
+    <MovieCard
+      {...item}
+      addMovie={() => this.addToFavorite(item)}
+      onWatchTrailer={() => this.handleWatchTrailer(item.id)}
+    />
+  );
 
   render() {
     const { movies } = this.props;
@@ -65,6 +77,7 @@ export default connect(
   state => ({ movies: state.movies }),
   {
     onSearch: search,
-    onAddMovieToFavorite: addMovieToFavorite
+    onAddMovieToFavorite: addMovieToFavorite,
+    onSelectMovie: selectMovie
   }
 )(searchScene);
