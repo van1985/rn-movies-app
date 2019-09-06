@@ -36,10 +36,11 @@ const movieCard = props => (
       </View>
       <View style={styles.subContainer}>
         <Button
-          icon={<Icon name="star" color="white" />}
+          icon={<Icon name="star" color={props.favorite ? 'yellow' : 'white'} />}
           buttonStyle={styles.button}
           title="Add to Favorites"
           onPress={props.addMovie}
+          disabled={props.favorite}
         />
         <Button
           icon={<Icon name="movie" color="white" />}
