@@ -6,7 +6,7 @@ Mobile App for search movies that connect with TMDb Api.
 2. cd rn-movies-app
 3. npm i
 4. npm start
-5. Open the project:
+5. Open the project: </ br>
 **For iOS**: open Xcode and open the project (/ios/rn_movies_app.xcworkspace). 
 **For Android**: open Android Studio and open the android project (/android).
 6. Run the project
