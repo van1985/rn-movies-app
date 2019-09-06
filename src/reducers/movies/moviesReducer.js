@@ -13,7 +13,10 @@ import {
 } from './moviesActionTypes';
 
 const initialState = () => ({
+  firstSearchPerformed: false,
   isFetching: false,
+  lastSearch: '',
+  success: false,
   searchResult: {},
   errors: '',
   favorites: [],
@@ -58,7 +61,11 @@ const moviesReducer = (state = initialState(), { type, payload }) => {
     case FETCHING_DATA:
       return {
         ...state,
-        isFetching: true
+        firstSearchPerformed: true,
+        isFetching: true,
+        errors: '',
+        success: false,
+        searchResult: []
       };
     case FETCHING_DATA_FAILURE:
       return {
@@ -70,6 +77,8 @@ const moviesReducer = (state = initialState(), { type, payload }) => {
       return {
         ...state,
         isFetching: false,
+        success: true,
+        lastSearch: payload.lastSearch,
         searchResult: filter(state, payload.response)
       };
     }

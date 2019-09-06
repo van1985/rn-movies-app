@@ -20,17 +20,21 @@ export const fetchRequest = type => ({
   type
 });
 
-export const fetchSuccess = (response, type) => ({
+export const fetchSuccess = (data, type) => ({
   type,
-  payload: { response }
+  payload: { ...data }
 });
 
-export const search = q => dispatch => {
+export const search = q => (dispatch, getState) => {
+  const { isFetching: alreadyFetching, lastSearch } = getState().movies;
+  if (alreadyFetching || !q || q === lastSearch) {
+    return null;
+  }
   const url = `${Config.API_URL}/search/movie?api_key=${Config.API_KEY}&query=${q}`;
   dispatch(fetchRequest(FETCHING_DATA));
   return fetch(url)
     .then(response => response.json())
-    .then(data => dispatch(fetchSuccess(data, FETCHING_DATA_SUCCESS)))
+    .then(data => dispatch(fetchSuccess({ response: data, lastSearch: q }, FETCHING_DATA_SUCCESS)))
     .catch(error => {
       dispatch(fetchFailure(error, FETCHING_DATA_FAILURE));
       return Promise.reject(error);
@@ -58,7 +62,7 @@ export const getTrailerKey = () => (dispatch, getState) => {
   dispatch(fetchRequest(TRAILER_FETCH_KEY_PERFORMED));
   return fetch(url)
     .then(response => response.json())
-    .then(data => dispatch(fetchSuccess(data, TRAILER_FETCH_KEY_SUCCESS)))
+    .then(data => dispatch(fetchSuccess({ response: data }, TRAILER_FETCH_KEY_SUCCESS)))
     .catch(error => {
       dispatch(fetchFailure(error, TRAILER_FETCH_KEY_FAILURE));
       return Promise.reject(error);
