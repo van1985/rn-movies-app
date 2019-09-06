@@ -1,5 +1,11 @@
 import Config from 'react-native-config';
-import { FETCHING_DATA_FAILURE, FETCHING_DATA_SUCCESS, FETCHING_DATA } from './moviesActionTypes';
+import {
+  FETCHING_DATA_FAILURE,
+  FETCHING_DATA_SUCCESS,
+  FETCHING_DATA,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE
+} from './moviesActionTypes';
 
 export const fetchFailure = error => ({
   type: FETCHING_DATA_FAILURE,
@@ -26,3 +32,13 @@ export const search = q => dispatch => {
       return Promise.reject(error);
     });
 };
+
+export const addMovieToFavorite = movie => ({
+  type: ADD_FAVORITE,
+  payload: { movie }
+});
+
+export const deleteMovieFromFavorite = movieId => ({
+  type: REMOVE_FAVORITE,
+  payload: { movieId }
+});
