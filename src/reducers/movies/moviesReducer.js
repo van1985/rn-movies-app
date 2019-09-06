@@ -1,12 +1,20 @@
-import { FETCHING_DATA_FAILURE, FETCHING_DATA_SUCCESS, FETCHING_DATA } from './dummyActionTypes';
+import Config from 'react-native-config';
+import { FETCHING_DATA_FAILURE, FETCHING_DATA_SUCCESS, FETCHING_DATA } from './moviesActionTypes';
 
 const initialState = {
   isFetching: false,
   searchResult: {},
-  errors: ''
+  errors: '',
+  favorites: {}
 };
 
-const dummyReducer = (state = initialState, { type, payload }) => {
+const filter = data => {
+  const newData = data;
+  newData.results = data.results.slice(0, Config.RESULTS_COUNT);
+  return newData;
+};
+
+const moviesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCHING_DATA:
       return {
@@ -23,7 +31,7 @@ const dummyReducer = (state = initialState, { type, payload }) => {
       return {
         ...initialState,
         isFetching: false,
-        searchResult: payload.response
+        searchResult: filter(payload.response)
       };
     }
     default:
@@ -31,4 +39,4 @@ const dummyReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default dummyReducer;
+export default moviesReducer;

@@ -1,17 +1,34 @@
-import { SwitchNavigator } from 'react-navigation';
-import dummyFlow from '../scenes/dummyFlow/navigator';
+import React from 'react';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
+import searchScene from '../scenes/searchFlow/searchScene';
+import favouritesScene from '../scenes/favoritesFlow/favoritesScene';
 
-/**
- * Main Stack Navigation. Used to display the app header
- */
-export default SwitchNavigator(
+const AppNavigator = createBottomTabNavigator(
   {
-    dummy: {
-      screen: dummyFlow
+    search: {
+      screen: searchScene,
+      navigationOptions: {
+        tabBarLabel: 'Search',
+        tabBarIcon: () => <Icon name="ios-search" size={24} />
+      }
+    },
+    favourites: {
+      screen: favouritesScene,
+      navigationOptions: {
+        tabBarLabel: 'Favorites',
+        tabBarIcon: () => <Icon name="ios-star" size={24} />
+      }
     }
   },
   {
-    initialRouteName: 'dummy',
-    headerMode: 'none'
+    initialRouteName: 'search',
+    order: ['search', 'favourites'],
+    navigationOptions: {
+      tabBarVisible: true,
+      tabBarIcon: null
+    }
   }
 );
+
+export default AppNavigator;
